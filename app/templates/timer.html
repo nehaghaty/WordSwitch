@@ -1,0 +1,23 @@
+<html>
+<head>
+      <title>Timer</title>
+      <script type = "text/javascript">
+         var seconds = 100;
+         function startTimer()
+         {         window.setInterval( "updateTime()", 1000 );   }
+         function updateTime()
+         {
+            --seconds;
+            document.getElementById( "soFar" ).innerHTML = seconds;
+            if(seconds==-1)
+            {
+                alert("Over");
+                }
+         }
+      </script>
+   </head>
+   <body onload = "startTimer()">
+      <p>Seconds spent playing the current game:
+      <strong id = "soFar">100</strong></p>
+   </body>
+</html>

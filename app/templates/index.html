@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Word Switch</title>
+    <link rel="stylesheet" type="text/css" href="/static/game.css">
+    <style>
+        #play {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-family:Helvetica;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4C5555;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 9px #999;
+}
+
+#play:hover {background-color: black;}
+
+#play:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.kaise{
+    font-size:20px;
+    }
+
+    </style>
+</head>
+<body>
+<div class="heading">Word Switch</div>
+<div class="wrapper">
+
+</div>
+<p class="kaise">How To Play: Pick the words in an order such that each word is one edit away from the previous word.<br/>
+ <pre><b>     time -> tame -> fame -> face -> pace -> space</b></pre>
+</pre>
+</p>
+<form action="/">
+   <button id="play" type="submit" value="Play Again" onclick="myVar = setTimeout(timer, 60000)">New Game
+    </button>
+</form>
+<br/><br/>
+<script>
+        function createArray(data)
+        {
+            var temp=data;
+            return temp;
+            }
+
+        var word=createArray({{ words|safe }});
+        var slicedWords=createArray({{ slicedWords|safe }});
+        document.writeln("First Word: <b>"+word[0]+"</b>");
+      </script>
+<p>
+
+{% for i in shuffword %}
+
+    <button class="btnlist">{{ i }} </button>
+    {% endfor %}
+</p>
+<script>
+    cnt=0;
+    var c=document.querySelectorAll(".btnlist");
+    for(var i=0;i<c.length;i++)
+    {
+        c[i].setAttribute("id",i);
+        c[i].addEventListener("click",func,false);
+        }
+    function func(e)
+    {
+        var x=e.target.innerHTML;
+        x=x.trim();
+        slicedWords[cnt]=slicedWords[cnt].trim();
+        if(x.localeCompare(slicedWords[cnt])==0)
+        {
+            cnt=cnt+1;
+            e.target.disabled=true;
+            e.target.style.opacity=0.6;
+
+        }
+        else
+        {
+        alert("Wrong word! Pick another word.");
+        }
+        if(cnt==c.length)
+            {
+                alert("You Won!");
+                }
+    }
+
+    document.writeln("Last Word: <b>"+word[(word.length)-1]+"</b>");
+
+</script>
+</body>
+</html>
